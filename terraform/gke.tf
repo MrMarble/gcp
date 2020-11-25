@@ -22,7 +22,7 @@ resource "google_container_cluster" "primary" {
 # Separately Managed Node Pool
 resource "google_container_node_pool" "primary_nodes" {
   name       = "${google_container_cluster.primary.name}-node-pool"
-  location   = var.region
+  location   = "${var.region}-a"
   cluster    = google_container_cluster.primary.name
   node_count = var.gke_num_nodes
 
@@ -38,6 +38,7 @@ resource "google_container_node_pool" "primary_nodes" {
 
     preemptible  = true
     machine_type = "g1-small"
+    disk_size_gb = 10
     tags         = ["gke-node", "${var.project_id}-gke"]
     metadata = {
       disable-legacy-endpoints = "true"
