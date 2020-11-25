@@ -7,7 +7,7 @@ variable "project_id" {
 variable "region" {
   type        = string
   description = "GCP Project default region"
-  default     = "us-central-1"
+  default     = "us-central1"
 }
 
 variable "service_account" {
