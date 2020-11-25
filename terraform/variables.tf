@@ -1,13 +1,11 @@
 variable "project_id" {
   type        = string
   description = "GCP Project id"
-  default     = "personal-296709"
 }
 
 variable "region" {
   type        = string
   description = "GCP Project default region"
-  default     = "us-central1"
 }
 
 variable "service_account" {
@@ -26,6 +24,11 @@ variable "gke_password" {
 }
 
 variable "gke_num_nodes" {
-  default     = 2
+  default     = 3
   description = "number of gke nodes"
+}
+
+variable "disk_size_gb" {
+  default     = 100
+  description = "Disk size in GBs for gke cluster"
 }
