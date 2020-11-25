@@ -1,7 +1,7 @@
 provider "google" {
-  project      = var.project_id
-  region       = var.region
-  access_token = var.service_account
+  project     = var.project_id
+  region      = var.region
+  credentials = var.service_account
 }
 
 # VPC
