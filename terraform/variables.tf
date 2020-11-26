@@ -8,6 +8,11 @@ variable "region" {
   description = "GCP Project default region"
 }
 
+variable "zone" {
+  type        = string
+  description = "GKE default zone"
+}
+
 variable "service_account" {
   type        = string
   description = "GCP Service Account Token"
