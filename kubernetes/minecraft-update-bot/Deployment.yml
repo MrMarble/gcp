@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-update-bot
+spec:
+  selector:
+    matchLabels:
+      app: minecraft-update-bot
+  template:
+    metadata:
+      labels:
+        app: minecraft-update-bot
+    spec:
+      containers:
+      - name: minecraft-update-bot
+        image: mrmarble/minecraft-update-bot:latest
+        imagePullPolicy: Always
+        command: ["node"]
+        args: ["/usr/src/app/build/index.js"]
+        env:
+          - name: NODE_PATH
+            value: /usr/src/app/output
+          - name: TOKEN
+            valueFrom:
+                secretKeyRef:
+                  key: token
+                  name: minecraft
+          - name: CHAT_ID
+            valueFrom:
+                secretKeyRef:
+                  key: chat
+                  name: minecraft
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        volumeMounts:
+          - mountPath:  /usr/src/app/output
+            name:  version
+      volumes:
+        - name: version
+          persistentVolumeClaim:
+            claimName: minecraft-update-claim
